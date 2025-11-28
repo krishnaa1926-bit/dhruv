@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dhruv Patel | AI & DS Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #111827;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.15);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-subtle: #1f2933;
+      --radius-lg: 18px;
+      --shadow-soft: 0 18px 35px rgba(15, 23, 42, 0.7);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f2937, #020617 55%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .page-wrapper {
+      min-height: 100vh;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 2.5rem;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.65));
+      border-bottom: 1px solid rgba(148, 163, 184, 0.28);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.9rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+    }
+    .logo-text span { color: var(--accent); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    nav a {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    }
+    nav a:hover {
+      background: rgba(15, 23, 42, 0.8);
+      border-color: var(--accent-soft);
+      color: var(--text-main);
+      transform: translateY(-1px);
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 2.1fr 1.4fr;
+      gap: 1.8rem;
+      margin-top: 1.8rem;
+      align-items: stretch;
+    }
+    .card {
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.06), rgba(15, 23, 42, 0.9));
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: var(--shadow-soft);
+      padding: 1.5rem 1.6rem;
+    }
+    .card-soft {
+      background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(15, 23, 42, 0.98));
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.85);
+      padding: 1.4rem 1.5rem;
+    }
+    .hero-title { font-size: 2rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .hero-title span { color: var(--accent); }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      margin-bottom: 0.75rem;
+    }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.7rem 0 1.4rem;
+    }
+    .tag {
+      font-size: 0.8rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      color: var(--text-muted);
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 0.3rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.15s ease, border-color 0.15s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #0ea5e9, #22c55e);
+      color: #0b1120;
+      font-weight: 600;
+      box-shadow: 0 14px 30px rgba(34, 197, 94, 0.35);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 35px rgba(34, 197, 94, 0.45);
+    }
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.9);
+      border-color: rgba(148, 163, 184, 0.5);
+      color: var(--text-main);
+    }
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 0.98);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .mini-heading {
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1.2fr;
+      gap: 0.7rem;
+      font-size: 0.85rem;
+    }
+    .contact-grid span.label {
+      display: block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin-bottom: 0.18rem;
+    }
+    .contact-item {
+      padding: 0.6rem 0.7rem;
+      border-radius: 0.9rem;
+      background: #020617;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+    }
+    .contact-highlight { color: var(--accent); font-weight: 500; }
+    main { margin-top: 1.8rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    section { scroll-margin-top: 90px; }
+    .section-card {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.85);
+      padding: 1.3rem 1.4rem;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.9rem;
+      gap: 0.7rem;
+    }
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .section-title span.icon { font-size: 1.1rem; }
+    .section-subtitle { font-size: 0.8rem; color: var(--text-muted); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1.3fr;
+      gap: 1.2rem;
+      font-size: 0.9rem;
+    }
+    .about-list {
+      list-style: none;
+      display: grid;
+      gap: 0.55rem;
+    }
+    .about-list li {
+      padding: 0.5rem 0.6rem;
+      border-radius: 0.8rem;
+      background: #020617;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .about-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+    }
+    .about-value { text-align: right; font-weight: 500; }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+      font-size: 0.9rem;
+    }
+    .skill-block {
+      background: #020617;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 0.7rem 0.8rem;
+    }
+    .skill-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .skill-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .chip {
+      font-size: 0.78rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-main);
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+    .project-card {
+      background: #020617;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 0.8rem 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.9rem;
+    }
+    .project-title { font-weight: 600; margin-bottom: 0.15rem; }
+    .project-tech { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.1rem; }
+    .project-link { font-size: 0.8rem; margin-top: 0.25rem; }
+    .project-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      border: 1px dashed rgba(75, 85, 99, 0.8);
+      align-self: flex-start;
+      margin-bottom: 0.15rem;
+    }
+    .list-simple {
+      list-style: none;
+      display: grid;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+    }
+    .list-simple li {
+      padding: 0.5rem 0.55rem;
+      border-radius: 0.85rem;
+      background: #020617;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+    }
+    .list-simple span.label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: 0.16rem;
+    }
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7rem;
+      font-size: 0.9rem;
+    }
+    .link-card {
+      background: #020617;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 0.7rem 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .link-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+    .resume-box {
+      background: #020617;
+      border-radius: 0.9rem;
+      border: 1px dashed rgba(56, 189, 248, 0.7);
+      padding: 0.85rem 0.9rem;
+      font-size: 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.85rem;
+      justify-content: space-between;
+    }
+    .resume-note {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      max-width: 420px;
+    }
+    .contact-flex {
+      display: grid;
+      grid-template-columns: 1.4fr 1.2fr;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+    .contact-text { color: var(--text-muted); }
+    .contact-main { font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .contact-details {
+      list-style: none;
+      display: grid;
+      gap: 0.4rem;
+    }
+    .contact-details li {
+      background: #020617;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 0.5rem 0.6rem;
+    }
+    .contact-details span.label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: 0.16rem;
+    }
+    footer {
+      margin-top: 1.8rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 1rem 0 0.4rem;
+      border-top: 1px solid rgba(15, 23, 42, 0.95);
+    }
+    footer span.heart { color: #f97316; }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: minmax(0, 1fr); }
+      .contact-grid { grid-template-columns: minmax(0, 1fr); }
+      .about-grid { grid-template-columns: minmax(0, 1fr); }
+      .skills-grid { grid-template-columns: minmax(0, 1fr); }
+      .projects-grid { grid-template-columns: minmax(0, 1fr); }
+      .links-grid { grid-template-columns: minmax(0, 1fr); }
+      .contact-flex { grid-template-columns: minmax(0, 1fr); }
+      .page-wrapper { padding-inline: 1rem; }
+    }
+    @media (max-width: 640px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav ul { gap: 0.25rem; }
+      .hero-title { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="nav-inner">
+    <div class="logo-text">
+      Dhruv <span>Patel</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#links">Links</a></li>
+        <li><a href="#resume">Resume</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="page-wrapper">
+  <section id="home" class="hero">
+    <div class="card">
+      <div class="hero-badge">
+        👨‍💻 B.Tech AI &amp; DS • Second Year
+      </div>
+      <h1 class="hero-title">
+        Hi, I’m <span>Dhruv Patel</span>
+      </h1>
+      <p class="hero-sub">
+        I am a B.Tech student in Artificial Intelligence &amp; Data Science with strong interests in
+        <strong>Python</strong>, <strong>Data Science</strong>, <strong>Web Development</strong>, <strong>AI</strong>, and
+        <strong>Cloud Technologies</strong>. I enjoy building projects, solving real-world problems, and continuously
+        improving my technical skills.
+      </p>
+      <div class="hero-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Machine Learning (Basics)</span>
+        <span class="tag">Data Analysis</span>
+        <span class="tag">Web &amp; Cloud</span>
+        <span class="tag">AI &amp; DS Student</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View My Projects 🚀</a>
+        <a href="Dhruv_Patel_ATS_Resume.docx" class="btn btn-ghost">Download Resume (PDF)</a>
+      </div>
+    </div>
+    <aside class="card-soft">
+      <p class="mini-heading">PROFILE SNAPSHOT</p>
+      <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.75rem;">
+        Passionate about learning and applying AI &amp; Data Science concepts through hands-on projects,
+        hackathons, and online courses.
+      </p>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <span class="label">Course</span>
+          <div class="contact-highlight">B.Tech in AI &amp; DS</div>
+        </div>
+        <div class="contact-item">
+          <span class="label">Year</span>
+          <div>Second Year (SY)</div>
+        </div>
+        <div class="contact-item">
+          <span class="label">Location</span>
+          <div>Pune, Maharashtra (Update as needed)</div>
+        </div>
+        <div class="contact-item">
+          <span class="label">Open To</span>
+          <div>Projects • Internships • Collaborations</div>
+        </div>
+      </div>
+    </aside>
+  </section>
+  <main>
+    <section id="about" class="section-card">
+      <div class="section-header">
+        <h2 class="section-title"><span class="icon">👤</span> About Me</h2>
+        <p class="section-subtitle">Quick details about education &amp; background.</p>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.9rem;">
+            I am an aspiring <strong>AI &amp; Data Science Engineer</strong>, currently in my second year of B.Tech.
+            I enjoy exploring the intersection of <strong>data</strong>, <strong>algorithms</strong>, and
+            <strong>real-world applications</strong>. I regularly practice coding, learn new tools, and contribute to
+            projects that help me grow both technically and personally.
+          </p>
+        </div>
+        <ul class="about-list">
+          <li><span class="about-label">Name</span><span class="about-value">Dhruv Patel</span></li>
+          <li><span class="about-label">Course</span><span class="about-value">B.Tech in AI &amp; DS</span></li>
+          <li><span class="about-label">College</span><span class="about-value">[Zeal College Of Engineering and Research]</span></li>
+          <li><span class="about-label">Location</span><span class="about-value">[Pune, Maharashtra]</span></li>
+          <li><span class="about-label">Email</span><span class="about-value">[pateldhruv2315@gmail.com]</span></li>
+          <li><span class="about-label">Contact No.</span><span class="about-value">[9028462362]</span></li>
+        </ul>
+      </div>
+    </section>
+    <section id="skills" class="section-card">
+      <div class="section-header">
+        <h2 class="section-title"><span class="icon">⚙</span> Skills</h2>
+        <p class="section-subtitle">Technologies and tools I work with.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-block">
+          <p class="skill-title">Programming Languages</p>
+          <div class="skill-chips">
+            <span class="chip">Python</span>
+            <span class="chip">C / C++</span>
+            <span class="chip">Java (Optional)</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <p class="skill-title">Data &amp; AI Skills</p>
+          <div class="skill-chips">
+            <span class="chip">Machine Learning (Basics)</span>
+            <span class="chip">Pandas</span>
+            <span class="chip">NumPy</span>
+            <span class="chip">Matplotlib</span>
+            <span class="chip">Power BI / Tableau</span>
+            <span class="chip">SQL &amp; Database Management</span>
+            <span class="chip">SQL &amp;Excel</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <p class="skill-title">Web &amp; Cloud</p>
+          <div class="skill-chips">
+            <span class="chip">HTML / CSS</span>
+            <span class="chip">WordPress</span>
+            <span class="chip">Wix</span>
+            <span class="chip">Cloud Basics (AWS / Azure)</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <p class="skill-title">Tools</p>
+          <div class="skill-chips">
+            <span class="chip">Jupyter Notebook</span>
+            <span class="chip">Google Colab</span>
+            <span class="chip">Git &amp; GitHub</span>
+            <span class="chip">VS Code</span>
+            <span class="chip">Excel</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="projects" class="section-card">
+      <div class="section-header">
+        <h2 class="section-title"><span class="icon">📁</span> Projects</h2>
+        <p class="section-subtitle">Some of the work I’ve done so far.</p>
+      </div>
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-tag">Project 1</div>
+          <h3 class="project-title">[Project Title 1]</h3>
+          <p class="project-tech">Tech Stack: Python / SQL / ML / HTML (Update as needed)</p>
+          <p>
+            Write a short explanation of your project here: what it does, which problem it solves, and what
+            tools or libraries you used. Keep it about 3–4 lines for clarity.
+          </p>
+          <p class="project-link">
+            🔗 GitHub:
+            <a href="https://github.com/your-username/your-project-1" target="_blank">
+              github.com/your-username/your-project-1
+            </a>
+          </p>
+          <p class="project-link">http://localhost:8501/</p>
+        </article>
+        <article class="project-card">
+          <div class="project-tag">Project 2</div>
+          <h3 class="project-title">[Project Title 2]</h3>
+          <p class="project-tech">Tech Stack: Python / ML (Update as needed)</p>
+          <p>
+            Add 3–4 lines summarizing this project: the idea, features, and what you learned while building it.
+            You can also mention datasets, APIs, or frameworks used.
+          </p>
+          <p class="project-link">
+            🔗 GitHub:
+            <a href="https://github.com/your-username/your-project-2" target="_blank">
+              github.com/your-username/your-project-2
+            </a>
+          </p>
+          <p class="project-link">🖼 Screenshot: (Insert another image showing results or UI)</p>
+        </article>
+      </div>
+    </section>
+    <section id="certifications" class="section-card">
+      <div class="section-header">
+        <h2 class="section-title"><span class="icon">🏅</span> Certifications &amp; Achievements</h2>
+        <p class="section-subtitle">Courses, competitions, and recognitions.</p>
+      </div>
+      <ul class="list-simple">
+        <li><span class="label">Certification</span>Completed Python Basics – HackerRank</li>
+        <li><span class="label">Certification</span>Completed SQL Intermediate – HackerRank</li>
+        <li><span class="label">Course</span>Machine Learning Course – Coursera</li>
+        <li><span class="label">Participation</span>Participation in Hackathons / Competitions</li>
+        <li><span class="label">Fest</span>Winner / Participant in College Tech Fest</li>
+      </ul>
+    </section>
+    <section id="links" class="section-card">
+      <div class="section-header">
+        <h2 class="section-title"><span class="icon">🔗</span> Important Links</h2>
+        <p class="section-subtitle">Find me online and explore my work.</p>
+      </div>
+      <div class="links-grid">
+        <div class="link-card">
+          <span class="link-label">GitHub Profile</span>
+          <a href="https://github.com/your-username" target="_blank">
+            https://github.com/<strong>Dhruv001001</strong>
+          </a>
+        </div>
+        <div class="link-card">
+          <span class="link-label">www.linkedin.com/in/dhruv-patel-521459332</span>
+          <a href="https://www.linkedin.com/in/your-username" target="_blank">
+            https://www.linkedin.com/in/<strong>your-username</strong>
+          </a>
+        </div>
+        <div class="link-card">
+          <span class="link-label">HackerRank Profile</span>
+          <a href="https://www.hackerrank.com/your-username" target="_blank">
+            https://www.hackerrank.com/<strong>@pateldhruv2315</strong>
+          </a>
+        </div>
+        <div class="link-card">
+          <span class="link-label">LeetCode Profile</span>
+          <a href="https://leetcode.com/your-username" target="_blank">
+            https://leetcode.com/<strong>your-username</strong>
+          </a>
+        </div>
+        <div class="link-card">
+          <span class="link-label">Portfolio Website (WordPress / Wix)</span>
+          <a href="https://yourname.wordpress.com" target="_blank">
+            https://yourname.wordpress.com
+          </a><br>
+          <a href="https://yourname.wixsite.com" target="_blank">
+            https://yourname.wixsite.com
+          </a>
+        </div>
+      </div>
+    </section>
+    <section id="resume" class="section-card">
+      <div class="section-header">
+        <h2 class="section-title"><span class="icon">📄</span> Resume</h2>
+        <p class="section-subtitle">Download my resume as PDF.</p>
+      </div>
+      <div class="resume-box">
+        <div class="resume-note">
+          Upload your <strong>resume.pdf</strong> file to your website folder (for example in an <code>assets/</code>
+          directory), then update the link below. Visitors can download it directly.
+        </div>
+        <a class="btn btn-primary" href="assets/resume.pdf" target="_blank">
+          ⬇ Click to Download My Resume
+        </a>
+      </div>
+    </section>
+    <section id="contact" class="section-card">
+      <div class="section-header">
+        <h2 class="section-title"><span class="icon">📬</span> Contact Me</h2>
+        <p class="section-subtitle">Let’s collaborate or build something together.</p>
+      </div>
+      <div class="contact-flex">
+        <div class="contact-text">
+          <p class="contact-main">
+            Have a project idea, internship opportunity, or collaboration in mind?
+          </p>
+          <p>
+            I’m always open to discussing <strong>AI &amp; DS projects</strong>, <strong>data-driven applications</strong>,
+            and <strong>learning opportunities</strong>. Feel free to reach out to me through email or connect on LinkedIn.
+          </p>
+        </div>
+        <ul class="contact-details">
+          <li>
+            <span class="label">Email</span>
+            <a href="mailto:your-email@example.com">pateldhruv2315@gmail.com</a>
+          </li>
+          <li>
+            <span class="label">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/dhruv-patel-521459332/" target="_blank">
+              www.linkedin.com/in/dhruv-patel-521459332
+            </a>
+          </li>
+          <li>
+            <span class="label">GitHub</span>
+            <a href="https://github.com/Dhruv001001" target="_blank">
+              Dhruv001001
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <footer>
+    © 2025 Dhruv Patel • Designed using WordPress / Wix / Custom Code •
+    Made with <span class="heart">❤</span> by an aspiring AI &amp; DS Engineer.
+  </footer>
+</div>
+</body>
+</html>
